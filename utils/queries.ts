@@ -1,3 +1,7 @@
+//this language is similar to graph ql
+//language is called GROQ (sanity query language) see docs
+//graph relational object query language
+//to fetch data from database
 export const allPostsQuery = () => {
   const query = `*[_type == "post"] | order(_createdAt desc){
       _id,
