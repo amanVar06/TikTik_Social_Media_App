@@ -2,6 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  images: {
+    domains: ["wallpaperspeed.id"],
+  },
+};
 
-module.exports = nextConfig
+//Invalid Src prop error, in next js you have to configure your
+//image's hostname
+
+module.exports = nextConfig;
