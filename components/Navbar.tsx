@@ -18,9 +18,12 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
 import { IoMdAdd } from "react-icons/io";
 import Logo from "../utils/tiktik-logo.png";
+import { createOrGetUser } from "../utils";
+
+import useAuthStore from "../store/authStore";
 
 const Navbar = () => {
-  const user = false;
+  const { userProfile, addUser } = useAuthStore();
 
   return (
     <div
@@ -42,12 +45,12 @@ const Navbar = () => {
       <div>SEARCH</div>
 
       <div>
-        {user ? (
-          <div>Logged In</div>
+        {userProfile ? (
+          <div>{userProfile?.userName}</div>
         ) : (
           <GoogleLogin
             onSuccess={(response) => {
-              console.log(response);
+              createOrGetUser(response, addUser);
             }}
             onError={() => {
               console.log("Error");

@@ -19,9 +19,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   if (isSSR) return null; //this is for smoother workflow in the future
 
+  // console.log(process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
+
   return (
+    // fix it later how to use client id as environment variable
     <GoogleOAuthProvider
-      clientId={`${process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
+      clientId="400889397306-3he1sfdcrnauv7bb3ms3go2ur8ice2np.apps.googleusercontent.com"
     >
       {/* whenever you change the environment variable you need to reload the server  */}
       <Navbar />
