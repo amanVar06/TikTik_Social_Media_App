@@ -23,3 +23,18 @@ export const createOrGetUser = async (response: any, addUser: any) => {
 
   // console.log(decoded);
 };
+
+// const handler = (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+//   return axios({
+//     method: 'post',
+//     headers : { 'Content-type': 'application/json' },
+//     url: `${process.env.WEB_API_URL}/authentication/login`,
+//     data: req.body,
+//   })
+//     .then((results) => {
+//       res.status(results.status).json(results.data)
+//     })
+//     .catch((error) => {
+//       res.status(error.status).json(error.response.data)
+//     })
+// }
