@@ -46,7 +46,7 @@ const Sidebar = () => {
             </Link>
           </div>
           {/* // is usernot logged in then we want to render something */}
-          {!userProfile && (
+          {/* {!userProfile && (
             <div className="px-2 py-4 hidden xl:block">
               <p className="text-gray-400">
                 Log in to like and comment on videos
@@ -54,7 +54,7 @@ const Sidebar = () => {
 
               <div className="pr-4">
                 <GoogleLogin
-                  clientId=""
+                  clientId="400889397306-3he1sfdcrnauv7bb3ms3go2ur8ice2np.apps.googleusercontent.com"
                   render={(renderProps) => (
                     <button
                       className="bg-white text-lg text-[#f51997] border-[1px] 
@@ -73,7 +73,7 @@ const Sidebar = () => {
                 />
               </div>
             </div>
-          )}
+          )} */}
 
           <Discover />
           <SuggestedAccounts />
