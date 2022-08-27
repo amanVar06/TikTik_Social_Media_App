@@ -7,26 +7,37 @@ interface Iprops {
   handleLike: () => void;
   handleDislike: () => void;
   likes: any[]; //an array of objects
+  isAlreadyLiked: boolean;
 }
 
-const LikeButton = ({ likes, handleLike, handleDislike }: Iprops) => {
-  const [alreadyLiked, setAlreadyLiked] = useState(false);
-  const { userProfile }: any = useAuthStore();
+const LikeButton = ({
+  isAlreadyLiked,
+  likes,
+  handleLike,
+  handleDislike,
+}: Iprops) => {
+  // const [alreadyLiked, setAlreadyLiked] = useState(false);
+  // const { userProfile }: any = useAuthStore();
 
-  const filterLikes = likes?.filter((item) => item._ref === userProfile?._id);
+  // const filterLikes = likes?.filter((item) => item._ref === userProfile?._id);
+  // const findLike = likes?.find((item) => item._ref == userProfile._id);
 
-  useEffect(() => {
-    if (filterLikes?.length > 0) {
-      setAlreadyLiked(true);
-    } else {
-      setAlreadyLiked(false);
-    }
-  }, [filterLikes, likes]);
+  // console.log(likes);
+
+  // useEffect(() => {
+  //   // if (findLike) {
+  //   if (filterLikes?.length > 0) {
+  //     setAlreadyLiked(true);
+  //   } else {
+  //     setAlreadyLiked(false);
+  //   }
+  //   // }, [likes, findLike]);
+  // }, [filterLikes, likes]);
 
   return (
     <div className="flex gap-6">
       <div className="mt-4 flex flex-col justify-center items-center cursor-pointer">
-        {alreadyLiked ? (
+        {isAlreadyLiked ? (
           <div
             className="bg-primary rounded-full p-2 md:p-4 text-[#f51997]"
             onClick={handleDislike}

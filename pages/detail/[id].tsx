@@ -27,6 +27,31 @@ const Detail = ({ postDetails }: Iprops) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
   const { userProfile }: any = useAuthStore();
+  const [comment, setComment] = useState("");
+  const [isPostingComment, setIsPostingComment] = useState(false);
+
+  console.log(post);
+
+  //for Like work
+  const [alreadyLiked, setAlreadyLiked] = useState(false);
+  const filterLikes = post.likes?.filter(
+    (item) => item._ref === userProfile?._id
+  );
+  // // const findLike = likes?.find((item) => item._ref == userProfile._id);
+
+  // // console.log(likes);
+
+  useEffect(() => {
+    // if (findLike) {
+    if (filterLikes?.length > 0) {
+      setAlreadyLiked(true);
+    } else {
+      setAlreadyLiked(false);
+    }
+    // }, [likes, findLike]);
+  }, [filterLikes, post.likes]);
+
+  // console.log(userProfile);
 
   const onVideoClick = () => {
     if (playing) {
@@ -57,7 +82,34 @@ const Detail = ({ postDetails }: Iprops) => {
         like,
       });
 
+      // console.log("data", data);
+      // console.log("post", post);
+
       setPost({ ...post, likes: data.likes });
+      // console.log(post);
+      //see files [id].tsx LikeButton.tsx like.ts to fix like button issue also see commit
+      // setPost((prevPost) => ({ ...prevPost, likes: data.likes }));
+    }
+  };
+
+  const addComment = async (e) => {
+    e.preventeDefault();
+
+    if (userProfile && comment) {
+      setIsPostingComment(true);
+
+      //put when we want to add something/or update something to the document
+      const { data } = await axios.put(
+        `http://localhost:3000/api/post/${post._id}`,
+        {
+          userId: userProfile._id,
+          comment,
+        }
+      );
+
+      setPost({ ...post, comments: data.comments });
+      setComment("");
+      setIsPostingComment(false);
     }
   };
 
@@ -149,13 +201,20 @@ const Detail = ({ postDetails }: Iprops) => {
             {userProfile && (
               <LikeButton
                 likes={post.likes}
+                isAlreadyLiked={alreadyLiked}
                 handleLike={() => handleLike(true)}
                 handleDislike={() => handleLike(false)}
               />
             )}
           </div>
 
-          <Comments />
+          <Comments
+            comment={comment}
+            setComment={setComment}
+            addComment={addComment}
+            comments={post.comments}
+            isPostingComment={isPostingComment}
+          />
         </div>
       </div>
     </div>
