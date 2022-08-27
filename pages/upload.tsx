@@ -16,11 +16,11 @@ const Upload = () => {
     SanityAssetDocument | undefined
   >();
   const [wrongFileType, setWrongFileType] = useState(false);
-  const [caption, setCaption] = useState('');
-  const [category, setCategory] = useState(topics[0].name)
-  const [savingPost, setSavingPost] = useState(false)
+  const [caption, setCaption] = useState("");
+  const [category, setCategory] = useState(topics[0].name);
+  const [savingPost, setSavingPost] = useState(false);
 
-  const {userProfile} : {userProfile: any} = useAuthStore();
+  const { userProfile }: { userProfile: any } = useAuthStore();
   const router = useRouter();
 
   const uploadVideo = async (e: any) => {
@@ -44,36 +44,36 @@ const Upload = () => {
   };
 
   const handlePost = async () => {
-    if(caption && videoAsset?._id && category) {
-      setSavingPost(true)
+    if (caption && videoAsset?._id && category) {
+      setSavingPost(true);
     }
 
     const document = {
-      _type: 'post',
+      _type: "post",
       caption,
       video: {
-        _type: 'file',
+        _type: "file",
         asset: {
-          _type: 'refernce',
-          _ref: videoAsset?._id
-        }
+          _type: "refernce",
+          _ref: videoAsset?._id,
+        },
       },
       userId: userProfile?._id,
       postedBy: {
-        _type: 'postedBy',
-        _ref: userProfile?._id
+        _type: "postedBy",
+        _ref: userProfile?._id,
       },
-      topic: category
-    }
+      topic: category,
+    };
 
-    await axios.post('http://localhost:3000/api/post', document)
-    router.push('/');
+    await axios.post("http://localhost:3000/api/post", document);
+    router.push("/");
     //pushing to the home page
-  }
+  };
 
   return (
-    <div className="flex w-full h-full absolute left-0 top-[60px] lg:top-[70px] mb-10 pt-10 lg:pt-20 bg-[#f8f8f8] justify-center">
-      <div className="bg-white rounded-lg xl:h-[80vh] w-[60%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6">
+    <div className="flex w-full h-full absolute left-0 top-[60px] lg:top-[70px] mb-10 pt-10 lg:pt-20 bg-gray-100 justify-center shadow-xl">
+      <div className="bg-white rounded-lg xl:h-[85vh] w-[60%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6">
         <div>
           <div>
             <p className="text-2xl font-bold">Upload Video</p>

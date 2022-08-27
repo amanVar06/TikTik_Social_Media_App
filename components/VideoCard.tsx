@@ -41,10 +41,17 @@ const VideoCard: NextPage<Iprops> = ({ post }) => {
     }
   };
 
+  //this is foe muting and unmuting of the video
+  useEffect(() => {
+    if (videoRef?.current) {
+      videoRef.current.muted = isVideoMuted;
+    }
+  }, [isVideoMuted]);
+
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
       <div>
-        <div className="flex gap-3 p-2 cursor-pointer font-semibold rounded">
+        <div className="flex gap-3 items-center p-2 cursor-pointer font-semibold rounded">
           <div className="md:w-16 md:h-16 w-10 h-10">
             <Link href="/">
               {/* you cant put an image as a child componentof link  */}
@@ -64,7 +71,7 @@ const VideoCard: NextPage<Iprops> = ({ post }) => {
             <Link href="/">
               <div className="flex items-center gap-2">
                 {/* this div for the username and the actual name  */}
-                <p className="flex gap-2 items-center md:text-md font-bold text-primary">
+                <p className="flex gap-2 items-center lg:text-lg md:text-md font-bold text-primary">
                   {post.postedBy.userName} {` `}
                   <GoVerified className="text-blue-400 text-md" />
                 </p>
@@ -76,6 +83,13 @@ const VideoCard: NextPage<Iprops> = ({ post }) => {
             </Link>
           </div>
         </div>
+      </div>
+
+      <div
+        className="font-semibold capitalize p-2 flex flex-wrap
+      w-[200px] lg:w-[600px] lg:ml-20 text-lg mb-2"
+      >
+        {post.caption}
       </div>
 
       {/* now for the actual video part  */}

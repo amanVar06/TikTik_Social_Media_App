@@ -23,18 +23,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     // fix it later how to use client id as environment variable
-    <GoogleOAuthProvider
-      clientId="400889397306-3he1sfdcrnauv7bb3ms3go2ur8ice2np.apps.googleusercontent.com"
-    >
-      {/* whenever you change the environment variable you need to reload the server  */}
-      <Navbar />
-      <div className="flex gap-6 md:gap-20">
-        {/* on medius devices gap 20 */}
-        <div className="h-[92vh] overflow-hidden xl:hover:overflow-auto">
-          <Sidebar />
-        </div>
-        <div className="mt-4 flex flex-col gap-10 overflow-auto h-[88vh] videos flex-1">
-          <Component {...pageProps} />
+    <GoogleOAuthProvider clientId="400889397306-3he1sfdcrnauv7bb3ms3go2ur8ice2np.apps.googleusercontent.com">
+      <div className="xl:w-[1200px] m-auto overflow-hidden h-[100vh]">
+        {/* whenever you change the environment variable you need to reload the server  */}
+        <Navbar />
+        <div className="flex gap-6 md:gap-20">
+          {/* on medius devices gap 20 */}
+          <div className="h-[92vh] overflow-hidden xl:hover:overflow-auto">
+            <Sidebar />
+          </div>
+          <div className="mt-4 flex flex-col gap-10 overflow-auto h-[88vh] videos flex-1">
+            <Component {...pageProps} />
+          </div>
         </div>
       </div>
     </GoogleOAuthProvider>
