@@ -30,7 +30,7 @@ const Detail = ({ postDetails }: Iprops) => {
   const [comment, setComment] = useState("");
   const [isPostingComment, setIsPostingComment] = useState(false);
 
-  console.log(post);
+  // console.log(post);
 
   //for Like work
   const [alreadyLiked, setAlreadyLiked] = useState(false);
@@ -92,8 +92,8 @@ const Detail = ({ postDetails }: Iprops) => {
     }
   };
 
-  const addComment = async (e) => {
-    e.preventeDefault();
+  const addComment = async (e: any) => {
+    // e.preventeDefault();
 
     if (userProfile && comment) {
       setIsPostingComment(true);
