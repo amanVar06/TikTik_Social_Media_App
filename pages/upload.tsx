@@ -11,6 +11,7 @@ import { client } from "../utils/client";
 import { topics } from "../utils/constants";
 
 const Upload = () => {
+  const [topic, setTopic] = useState<String>(topics[0].name);
   const [isLoading, setIsLoading] = useState(false);
   const [videoAsset, setVideoAsset] = useState<
     SanityAssetDocument | undefined
@@ -23,11 +24,17 @@ const Upload = () => {
   const { userProfile }: { userProfile: any } = useAuthStore();
   const router = useRouter();
 
+  useEffect(() => {
+    if (!userProfile) router.push("/");
+  }, [userProfile, router]);
+
   const uploadVideo = async (e: any) => {
     const selectedFile = e.target.files[0];
     const fileTypes = ["video/mp4", "video/webm", "video/ogg"];
 
     if (fileTypes.includes(selectedFile.type)) {
+      setWrongFileType(false);
+      setIsLoading(true);
       client.assets
         .upload("file", selectedFile, {
           contentType: selectedFile.type,
@@ -71,8 +78,15 @@ const Upload = () => {
     //pushing to the home page
   };
 
+  const handleDiscard = () => {
+    setSavingPost(false);
+    setVideoAsset(undefined);
+    setCaption("");
+    setTopic("");
+  };
+
   return (
-    <div className="flex w-full h-full absolute left-0 top-[60px] lg:top-[70px] mb-10 pt-10 lg:pt-20 bg-gray-100 justify-center shadow-xl">
+    <div className="flex w-full h-full absolute left-0 top-[60px] lg:top-[70px] mb-10 pt-10 lg:pt-20 bg-gray-100 justify-center">
       <div className="bg-white rounded-lg xl:h-[85vh] w-[60%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6">
         <div>
           <div>
@@ -92,7 +106,7 @@ const Upload = () => {
                       src={videoAsset.url}
                       loop
                       controls
-                      className="rounded-xl h-[450px] mt-16 bg-black"
+                      className="rounded-xl h-[400px] bg-black"
                     ></video>
                   </div>
                 ) : (
@@ -163,7 +177,7 @@ const Upload = () => {
           <div className="flex gap-6 mt-10">
             <button
               type="button"
-              onClick={() => {}}
+              onClick={handleDiscard}
               className="border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
             >
               Discard

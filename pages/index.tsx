@@ -20,7 +20,7 @@ interface Iprops {
 //video is going to a type of Iprops
 //and now we know exactly what the video contains
 const Home = ({ videos }: Iprops) => {
-  console.log(videos);
+  // console.log(videos);
 
   return (
     <div className="flex flex-col gap-10 videos h-full">
@@ -36,15 +36,25 @@ const Home = ({ videos }: Iprops) => {
 // the way we fetch data in next js is by using getServerSideProps
 //in our case we need to fetch new videos each time when we load the page
 //see docs when to use this function
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({
+  query: { topic },
+}: {
+  query: { topic: string };
+}) => {
   // so we are making some kind of a get call to a specific url
   // making a get request to our own backend, inside of next js we can
   // create our own fully fledged back-end
-  const { data } = await axios.get(`http://localhost:3000/api/post`);
+
+  let response = null;
+  if (topic) {
+    response = await axios.get(`http://localhost:3000/api/discover/${topic}`);
+  } else {
+    response = await axios.get(`http://localhost:3000/api/post`);
+  }
 
   return {
     props: {
-      videos: data,
+      videos: response.data,
     },
   };
 };
