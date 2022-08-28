@@ -92,8 +92,8 @@ const Detail = ({ postDetails }: Iprops) => {
     }
   };
 
-  const addComment = async (e: any) => {
-    // e.preventeDefault();
+  const addComment = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
 
     if (userProfile && comment) {
       setIsPostingComment(true);
