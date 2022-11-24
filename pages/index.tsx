@@ -3,6 +3,7 @@ import axios from "axios";
 import { Video } from "../types";
 import VideoCard from "../components/VideoCard";
 import NoResults from "../components/NoResults";
+import { BASE_URL } from "../utils";
 
 //whenever you are accepting some props inside your next js page
 //we need to create a interface(also like an object)
@@ -47,9 +48,9 @@ export const getServerSideProps = async ({
 
   let response = null;
   if (topic) {
-    response = await axios.get(`http://localhost:3000/api/discover/${topic}`);
+    response = await axios.get(`${BASE_URL}/api/discover/${topic}`);
   } else {
-    response = await axios.get(`http://localhost:3000/api/post`);
+    response = await axios.get(`${BASE_URL}/api/post`);
   }
 
   return {

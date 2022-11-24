@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { FaCloudDownloadAlt, FaCloudUploadAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
+import { BASE_URL } from "../utils";
 import { SanityAssetDocument } from "@sanity/client";
 
 import useAuthStore from "../store/authStore";
@@ -73,7 +74,7 @@ const Upload = () => {
       topic: category,
     };
 
-    await axios.post("http://localhost:3000/api/post", document);
+    await axios.post(`${BASE_URL}/api/post`, document);
     router.push("/");
     //pushing to the home page
   };
