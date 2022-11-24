@@ -23,7 +23,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     // fix it later how to use client id as environment variable
-    <GoogleOAuthProvider clientId="400889397306-3he1sfdcrnauv7bb3ms3go2ur8ice2np.apps.googleusercontent.com">
+    // <GoogleOAuthProvider clientId="400889397306-3he1sfdcrnauv7bb3ms3go2ur8ice2np.apps.googleusercontent.com">
+    <GoogleOAuthProvider
+      clientId={`${process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN}`}
+    >
       <div className="xl:w-[1200px] m-auto overflow-hidden h-[100vh]">
         {/* whenever you change the environment variable you need to reload the server  */}
         <Navbar />
