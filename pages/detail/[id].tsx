@@ -123,7 +123,6 @@ const Detail = ({ postDetails }: Iprops) => {
             <MdOutlineCancel className="text-white text-[35px]" />
           </p>
         </div>
-
         {/* setting up video view now  */}
         <div className="relative">
           <div className="lg:h-[100vh] h-[80vh]">
